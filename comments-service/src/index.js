@@ -26,7 +26,7 @@ app.post('/posts/:id/comments', async (req, res) => {
   commentsByPostId[postId] = comments;
 
   await axios.post('http://localhost:4005/events',
-    {type: 'CommentCreated', data: newComment});
+    {type: 'CommentCreated', data: {postId, ...newComment}});
 
   res.status(201).send(newComment);
 });
